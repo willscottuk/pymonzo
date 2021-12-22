@@ -394,11 +394,10 @@ class MonzoAPI(CommonMixin):
                 raise ValueError("You need to pass account ID")
 
         get_params = {
-            "account_id": account_id
+            "account_id": account_id,
+            "since": "2021-12-22T00:00:00Z",
             }
 
-        if since:
-            get_params['since'] = str(since)
         if before:
             get_params['before'] = before
 
