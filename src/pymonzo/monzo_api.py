@@ -398,7 +398,7 @@ class MonzoAPI(CommonMixin):
             }
 
         if since:
-            get_params['since'] = since
+            get_params['since'] = str(since)
         if before:
             get_params['before'] = before
 
