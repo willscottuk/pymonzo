@@ -367,7 +367,7 @@ class MonzoAPI(CommonMixin):
 
         return MonzoPot(data=response.json(), context=self)
 
-    def transactions(self, account_id=None, since=None, before=None, reverse=True, limit=None):
+    def transactions(self, account_id=None, reverse=True, limit=None):
         """
         Returns a list of transactions on the user's account.
 
@@ -395,7 +395,7 @@ class MonzoAPI(CommonMixin):
 
         get_params = {
             "account_id": account_id,
-            "since": "2021-12-22T00:00:00Z",
+            "since": '2021-12-22T00:00:00Z',
             }
 
         if before:
