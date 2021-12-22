@@ -367,7 +367,7 @@ class MonzoAPI(CommonMixin):
 
         return MonzoPot(data=response.json(), context=self)
 
-    def transactions(self, account_id=None, reverse=True, limit=None):
+    def transactions(self, account_id=None, since=None, before=None, reverse=True, limit=None):
         """
         Returns a list of transactions on the user's account.
 
@@ -376,6 +376,10 @@ class MonzoAPI(CommonMixin):
 
         :param account_id: Monzo account ID
         :type account_id: str
+        :param since: Start time as RFC3339 encoded timestamp
+        :type since: str
+        :param before: End time as RFC3339 encoded timestamp
+        :type before: str
         :param reverse: whether transactions should be in in descending order
         :type reverse: bool
         :param limit: how many transactions should be returned; None for all
@@ -389,18 +393,19 @@ class MonzoAPI(CommonMixin):
             else:
                 raise ValueError("You need to pass account ID")
 
+        if account_id:
+            get_params['account_id'] = account_id
+        if since:
+            get_params['since]'] = since
+        if before:
+            get_params['params[background_color]'] = since
+
         endpoint = '/transactions'
         response = self._get_response(
             method='get', endpoint=endpoint,
-            params={
-                'account_id': account_id,
-            },
+            body=get_params,
         )
 
-        # The API does not allow reversing the list or limiting it, so to do
-        # the basic query of 'get the latest transaction' we need to always get
-        # all transactions and do the reversing and slicing in Python
-        # I send Monzo an email, we'll se how they'll respond
         transactions = response.json()['transactions']
         if reverse:
             transactions.reverse()
