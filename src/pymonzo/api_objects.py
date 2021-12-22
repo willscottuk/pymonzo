@@ -158,7 +158,7 @@ class MonzoTransaction(MonzoObject):
     Class representation of Monzo transaction
     """
     _required_keys = [
-        'account_balance', 'amount', 'created', 'currency', 'description',
+        'amount', 'created', 'currency', 'description',
         'id', 'merchant', 'metadata', 'notes', 'is_load',
     ]
 
