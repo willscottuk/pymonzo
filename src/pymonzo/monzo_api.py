@@ -398,7 +398,7 @@ class MonzoAPI(CommonMixin):
         if since:
             get_params['since]'] = since
         if before:
-            get_params['params[background_color]'] = since
+            get_params['before'] = before
 
         endpoint = '/transactions'
         response = self._get_response(
