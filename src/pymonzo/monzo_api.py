@@ -405,7 +405,7 @@ class MonzoAPI(CommonMixin):
         endpoint = '/transactions'
         response = self._get_response(
             method='get', endpoint=endpoint,
-            params=get_params,
+            params=json.dumps(get_params)),
         )
 
         transactions = response.json()['transactions']
