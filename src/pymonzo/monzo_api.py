@@ -367,7 +367,7 @@ class MonzoAPI(CommonMixin):
 
         return MonzoPot(data=response.json(), context=self)
 
-    def transactions(self, account_id=None, since=None, before=None, reverse=True, limit=None):
+    def transactions(self, account_id=None, since=None, before=None, reverse=True, limit=None, expand_merchant=False):
         """
         Returns a list of transactions on the user's account.
 
@@ -401,8 +401,9 @@ class MonzoAPI(CommonMixin):
             get_params['since'] = since
         if before:
             get_params['before'] = before
-
-        endpoint = '/transactions'
+        if expand_merchant:
+            get_params['expand[]'] = 'merchant'
+        
         response = self._get_response(
             method='get', endpoint=endpoint,
             params=get_params,
