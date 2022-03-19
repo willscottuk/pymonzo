@@ -186,7 +186,7 @@ class MonzoMerchant(MonzoObject):
     Class representation of Monzo merchants
     """
     _required_keys = [
-        'address', 'created', 'group_id', 'id',
+        'address', 'group_id', 'id',
         'logo', 'emoji', 'name', 'category',
     ]
 
