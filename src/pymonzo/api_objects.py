@@ -158,7 +158,7 @@ class MonzoTransaction(MonzoObject):
     Class representation of Monzo transaction
     """
     _required_keys = [
-        'amount', 'created', 'currency', 'description',
+        'amount', 'currency', 'description',
         'id', 'merchant', 'metadata', 'notes', 'is_load',
     ]
 
@@ -169,7 +169,8 @@ class MonzoTransaction(MonzoObject):
         :param data: response from Monzo API request
         :type data: dict
         """
-        self.created = parse_date(data.pop('created'))
+        if data.get('created'):  # Not always returned
+            self.created = parse_date(data.pop('created'))
 
         if data.get('settled'):  # Not always returned
             self.settled = parse_date(data.pop('settled'))
